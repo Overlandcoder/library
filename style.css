@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+}
+
+.library {
+  height: 80%;
+  width: 60%;
+}
+
+.book-list {
+  border: 1px solid black;
+  padding: 20px;
+}
+
+#book-form {
+  display: flex;
+}
+
+.hidden {
+  display: none;
+}
