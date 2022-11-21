@@ -44,6 +44,17 @@ function toggleDisplay(item) {
   }
 }
 
+function addListenerToRemoveButtons(){
+  const removeBookButtons = document.querySelectorAll(".remove-book");
+  removeBookButtons.forEach(btn => btn.addEventListener("click", () => {
+    let bookId = btn.getAttribute("data-book-id")
+    const bookToRemove = document.getElementById(bookId);
+    bookList.removeChild(bookToRemove);
+    let bookObjectToRemove = myLibrary[bookId - 1]
+    myLibrary = myLibrary.filter(book => book !== bookObjectToRemove);
+  }))
+}
+
 function customSubmit(event) {
   event.preventDefault();
   const title = document.getElementById("title");
@@ -52,6 +63,7 @@ function customSubmit(event) {
   const read = document.getElementById("read");
   addBookToLibrary(title.value, author.value, pages.value, read.value);
   displayBook(myLibrary.at(-1));
+  addListenerToRemoveButtons();
 }
 
 newBookButton.addEventListener("click", () => {
@@ -65,12 +77,4 @@ addBookToLibrary("The Something", "Cool Author", 255, "not read");
 addBookToLibrary("The Lord", "Some Author", 495, "read");
 addBookToLibrary("Some Book", "Another Author", 595, "not read");
 displayAllBooks();
-
-const removeBookButtons = document.querySelectorAll(".remove-book");
-removeBookButtons.forEach(btn => btn.addEventListener("click", () => {
-  let bookId = btn.getAttribute("data-book-id")
-  const bookToRemove = document.getElementById(bookId);
-  bookList.removeChild(bookToRemove);
-  let bookObjectToRemove = myLibrary[bookId - 1]
-  myLibrary = myLibrary.filter(book => book !== bookObjectToRemove);
-}))
+addListenerToRemoveButtons();
