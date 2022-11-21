@@ -7,7 +7,7 @@
 
 .library {
   height: 80%;
-  width: 60%;
+  width: 50%;
 }
 
 .book-list {
@@ -21,4 +21,10 @@
 
 .hidden {
   display: none;
+}
+
+.book {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
 }

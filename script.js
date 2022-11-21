@@ -25,9 +25,12 @@ function displayAllBooks() {
 
 function displayBook(book) {
   const div = document.createElement("div");
-  div.classList.add("book");
   div.textContent = `Title: ${book.title}. Author: ${book.author}. Pages: ${book.numPages}.`;
+  div.classList.add("book");
+  const btn = document.createElement("button");
+  btn.textContent = "Remove";
   bookList.appendChild(div);
+  div.appendChild(btn);
 }
 
 function toggleDisplay(item) {
