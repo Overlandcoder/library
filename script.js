@@ -29,6 +29,7 @@ function displayBook(book) {
   div.appendChild(readCheckbox);
   div.appendChild(removeBookButton);
   addListenerToRemoveButton(removeBookButton);
+  addListenerToCheckbox(readCheckbox);
   div.setAttribute("id", myLibrary.indexOf(book) + 1);
   bookList.appendChild(div);
 }
@@ -64,13 +65,12 @@ function addListenerToRemoveButton(btn) {
   })
 }
 
-function addListenerToCheckboxes() {
-  const readCheckboxes = document.querySelectorAll(".read-checkbox");
-  readCheckboxes.forEach(cbox => cbox.addEventListener("click", () => {
+function addListenerToCheckbox(cbox) {
+  cbox.addEventListener("click", () => {
     let bookId = cbox.closest(".book").id;
     const selectedBook = myLibrary[bookId - 1];
     selectedBook.read = !selectedBook.read;
-  }))
+  })
 }
 
 function customSubmit(event) {
@@ -81,7 +81,6 @@ function customSubmit(event) {
   const read = document.getElementById("read");
   addBookToLibrary(title.value, author.value, pages.value, read.checked);
   displayBook(myLibrary.at(-1));
-  addListenerToCheckboxes();
 }
 
 newBookButton.addEventListener("click", () => {
@@ -99,7 +98,6 @@ addBookToLibrary("The Something", "Cool Author", 255, false);
 addBookToLibrary("The Lord", "Some Author", 495, true);
 addBookToLibrary("Some Book", "Another Author", 595, false);
 displayAllBooks();
-addListenerToCheckboxes();
 
 const removeButtons = document.querySelectorAll(".remove-book");
 removeButtons.forEach(btn => addListenerToRemoveButton(btn));
