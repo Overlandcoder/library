@@ -28,6 +28,7 @@ function displayBook(book) {
   readCheckbox.checked = book.read;
   div.appendChild(readCheckbox);
   div.appendChild(removeBookButton);
+  addListenerToRemoveButton(removeBookButton);
   div.setAttribute("id", myLibrary.indexOf(book) + 1);
   bookList.appendChild(div);
 }
@@ -53,15 +54,14 @@ function createCheckbox() {
   return readCheckbox;
 }
 
-function addListenerToRemoveButtons() {
-  const removeBookButtons = document.querySelectorAll(".remove-book");
-  removeBookButtons.forEach(btn => btn.addEventListener("click", () => {
+function addListenerToRemoveButton(btn) {
+  btn.addEventListener("click", () => {
     let bookId = btn.closest(".book").id;
     const bookToRemove = document.getElementById(bookId);
     bookList.removeChild(bookToRemove);
     let bookObjectToRemove = myLibrary[bookId - 1]
     myLibrary = myLibrary.filter(book => book !== bookObjectToRemove);
-  }))
+  })
 }
 
 function addListenerToCheckboxes() {
@@ -81,7 +81,6 @@ function customSubmit(event) {
   const read = document.getElementById("read");
   addBookToLibrary(title.value, author.value, pages.value, read.checked);
   displayBook(myLibrary.at(-1));
-  addListenerToRemoveButtons();
   addListenerToCheckboxes();
 }
 
@@ -100,5 +99,7 @@ addBookToLibrary("The Something", "Cool Author", 255, false);
 addBookToLibrary("The Lord", "Some Author", 495, true);
 addBookToLibrary("Some Book", "Another Author", 595, false);
 displayAllBooks();
-addListenerToRemoveButtons();
 addListenerToCheckboxes();
+
+const removeButtons = document.querySelectorAll(".remove-book");
+removeButtons.forEach(btn => addListenerToRemoveButton(btn));
