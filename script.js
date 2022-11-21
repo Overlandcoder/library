@@ -28,8 +28,6 @@ function displayBook(book) {
   readCheckbox.checked = book.read;
   div.appendChild(readCheckbox);
   div.appendChild(removeBookButton);
-  removeBookButton.setAttribute("data-book-id", myLibrary.indexOf(book) + 1);
-  readCheckbox.setAttribute("data-book-id", myLibrary.indexOf(book) + 1);
   div.setAttribute("id", myLibrary.indexOf(book) + 1);
   bookList.appendChild(div);
 }
@@ -58,7 +56,7 @@ function createCheckbox() {
 function addListenerToRemoveButtons() {
   const removeBookButtons = document.querySelectorAll(".remove-book");
   removeBookButtons.forEach(btn => btn.addEventListener("click", () => {
-    let bookId = btn.getAttribute("data-book-id")
+    let bookId = btn.closest(".book").id;
     const bookToRemove = document.getElementById(bookId);
     bookList.removeChild(bookToRemove);
     let bookObjectToRemove = myLibrary[bookId - 1]
@@ -69,11 +67,9 @@ function addListenerToRemoveButtons() {
 function addListenerToCheckboxes() {
   const readCheckboxes = document.querySelectorAll(".read-checkbox");
   readCheckboxes.forEach(cbox => cbox.addEventListener("click", () => {
-    let bookId = cbox.getAttribute("data-book-id");
+    let bookId = cbox.closest(".book").id;
     const selectedBook = myLibrary[bookId - 1];
-    console.log(selectedBook.read);
     selectedBook.read = !selectedBook.read;
-    console.log(selectedBook.read);
   }))
 }
 
