@@ -13,9 +13,11 @@
 .book-list {
   border: 1px solid black;
   padding: 20px;
+  margin-bottom: 30px;
 }
 
-#book-form {
+.form-container {
+  margin-top: 20px;
   display: flex;
 }
 
@@ -27,4 +29,8 @@
   display: flex;
   justify-content: space-between;
   padding: 10px;
+}
+
+.buttons {
+  margin-top: 20px;
 }

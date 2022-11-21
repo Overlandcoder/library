@@ -15,25 +15,27 @@
       </div>
       <button class="new-book">New Book</button>
       <form id="book-form">
-        <div class="form-item hidden">
-          <label for="title">Title</label>
-          <input type="text" id="title" name="title" required>
+        <div class="form-container">
+          <div class="form-item hidden">
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title" required>
+          </div>
+          <div class="form-item hidden">
+            <label for="author">Author</label>
+            <input type="text" id="author" name="author" required>
+          </div>
+          <div class="form-item hidden">
+            <label for="pages">Pages</label>
+            <input type="text" id="pages" name="pages" required>
+          </div>
+          <div class="form-item hidden">
+            <label for="read">Read?</label>
+            <input type="checkbox" id="read" name="read" required>
+          </div>
         </div>
-        <div class="form-item hidden">
-          <label for="author">Author</label>
-          <input type="text" id="author" name="author" required>
-        </div>
-        <div class="form-item hidden">
-          <label for="pages">Pages</label>
-          <input type="text" id="pages" name="pages" required>
-        </div>
-        <div class="form-item hidden">
-          <label for="read">Read?</label>
-          <input type="checkbox" id="read" name="read" required>
-        </div>
-        <div class="form-item hidden">
+        <div class="form-item buttons hidden">
           <button type="submit" class="add-book">Add Book</button>
-          <button>Cancel</button>
+          <button class="cancel">Cancel</button>
         </div>
       </form>
     </div>
