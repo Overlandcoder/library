@@ -9,7 +9,7 @@ function Book(title, author, numPages, read) {
   this.title = title;
   this.author = author;
   this.numPages = numPages;
-  this.read = read == "read" ? "Yes" : "No";
+  this.read = read ? "yes" : "no";
   this.info = function () {
     return `${title} by ${author}, ${numPages} pages, has ${read}.`;
   }
@@ -25,8 +25,10 @@ function displayAllBooks() {
 }
 
 function displayBook(book) {
-  const div = createBookDiv();
+  const div = createBookDiv(book);
   const removeBookButton = createRemoveBookButton();
+  const readCheckbox = createCheckbox();
+  div.appendChild(readCheckbox);
   div.appendChild(removeBookButton);
   removeBookButton.setAttribute("data-book-id", myLibrary.indexOf(book) + 1);
   div.setAttribute("id", myLibrary.indexOf(book) + 1);
@@ -35,7 +37,7 @@ function displayBook(book) {
 
 function createBookDiv(book) {
   const div = document.createElement("div");
-  div.textContent = `Title: ${book.title}. Author: ${book.author}. Pages: ${book.numPages}.`;
+  div.textContent = `${book.title} by ${book.author}. Pages: ${book.numPages}. Read: ${book.read}`;
   div.classList.add("book");
   return div;
 }
@@ -45,6 +47,12 @@ function createRemoveBookButton() {
   removeBookButton.textContent = "Remove";
   removeBookButton.classList.add("remove-book");
   return removeBookButton;
+}
+
+function createCheckbox() {
+  const readCheckbox = document.createElement("INPUT");
+  readCheckbox.setAttribute("type", "checkbox");
+  return readCheckbox;
 }
 
 function addListenerToRemoveButtons(){
@@ -64,7 +72,7 @@ function customSubmit(event) {
   const author = document.getElementById("author");
   const pages = document.getElementById("pages");
   const read = document.getElementById("read");
-  addBookToLibrary(title.value, author.value, pages.value, read.value);
+  addBookToLibrary(title.value, author.value, pages.value, read.checked);
   displayBook(myLibrary.at(-1));
   addListenerToRemoveButtons();
 }
