@@ -8,7 +8,7 @@ function Book(title, author, numPages, read) {
   this.title = title;
   this.author = author;
   this.numPages = numPages;
-  this.read = read == "read" ? "read" : "not read";
+  this.read = read == "read" ? "Yes" : "No";
   this.info = function () {
     return `${title} by ${author}, ${numPages} pages, has ${read}.`;
   }
