@@ -27,10 +27,13 @@ function displayBook(book) {
   const div = document.createElement("div");
   div.textContent = `Title: ${book.title}. Author: ${book.author}. Pages: ${book.numPages}.`;
   div.classList.add("book");
-  const btn = document.createElement("button");
-  btn.textContent = "Remove";
+  const removeBookButton = document.createElement("button");
+  removeBookButton.textContent = "Remove";
+  removeBookButton.classList.add("remove-book");
+  div.appendChild(removeBookButton);
+  removeBookButton.setAttribute("data-book-id", myLibrary.indexOf(book) + 1);
+  div.setAttribute("id", myLibrary.indexOf(book) + 1);
   bookList.appendChild(div);
-  div.appendChild(btn);
 }
 
 function toggleDisplay(item) {
@@ -40,12 +43,6 @@ function toggleDisplay(item) {
     item.style.display = "none";
   }
 }
-
-newBookButton.addEventListener("click", () => {
-  formItems.forEach(item => item.classList.toggle("hidden"));
-});
-
-addBookButton.addEventListener("click", customSubmit);
 
 function customSubmit(event) {
   event.preventDefault();
@@ -57,8 +54,23 @@ function customSubmit(event) {
   displayBook(myLibrary.at(-1));
 }
 
+newBookButton.addEventListener("click", () => {
+  formItems.forEach(item => item.classList.toggle("hidden"));
+});
+
+addBookButton.addEventListener("click", customSubmit);
+
 addBookToLibrary("The Lord of the Rings", "J.R.R. Tolkien", 295, "read");
 addBookToLibrary("The Something", "Cool Author", 255, "not read");
 addBookToLibrary("The Lord", "Some Author", 495, "read");
 addBookToLibrary("Some Book", "Another Author", 595, "not read");
 displayAllBooks();
+
+const removeBookButtons = document.querySelectorAll(".remove-book");
+removeBookButtons.forEach(btn => btn.addEventListener("click", () => {
+  let bookId = btn.getAttribute("data-book-id")
+  const bookToRemove = document.getElementById(bookId);
+  bookList.removeChild(bookToRemove);
+  let bookObjectToRemove = myLibrary[bookId - 1]
+  myLibrary = myLibrary.filter(book => book !== bookObjectToRemove);
+}))
