@@ -3,6 +3,7 @@ const bookList = document.querySelector(".book-list");
 const newBookButton = document.querySelector(".new-book");
 const formItems = document.querySelectorAll(".form-item");
 const addBookButton = document.querySelector(".add-book");
+const cancelButton = document.querySelector(".cancel");
 
 function Book(title, author, numPages, read) {
   this.title = title;
@@ -36,14 +37,6 @@ function displayBook(book) {
   bookList.appendChild(div);
 }
 
-function toggleDisplay(item) {
-  if (item.style.display === "none") {
-    item.style.display = "block";
-  } else {
-    item.style.display = "none";
-  }
-}
-
 function addListenerToRemoveButtons(){
   const removeBookButtons = document.querySelectorAll(".remove-book");
   removeBookButtons.forEach(btn => btn.addEventListener("click", () => {
@@ -69,6 +62,10 @@ function customSubmit(event) {
 newBookButton.addEventListener("click", () => {
   formItems.forEach(item => item.classList.toggle("hidden"));
 });
+
+cancelButton.addEventListener("click", () => {
+  formItems.forEach(item => item.classList.toggle("hidden"));
+})
 
 addBookButton.addEventListener("click", customSubmit);
 
