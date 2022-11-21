@@ -25,16 +25,26 @@ function displayAllBooks() {
 }
 
 function displayBook(book) {
-  const div = document.createElement("div");
-  div.textContent = `Title: ${book.title}. Author: ${book.author}. Pages: ${book.numPages}.`;
-  div.classList.add("book");
-  const removeBookButton = document.createElement("button");
-  removeBookButton.textContent = "Remove";
-  removeBookButton.classList.add("remove-book");
+  const div = createBookDiv();
+  const removeBookButton = createRemoveBookButton();
   div.appendChild(removeBookButton);
   removeBookButton.setAttribute("data-book-id", myLibrary.indexOf(book) + 1);
   div.setAttribute("id", myLibrary.indexOf(book) + 1);
   bookList.appendChild(div);
+}
+
+function createBookDiv(book) {
+  const div = document.createElement("div");
+  div.textContent = `Title: ${book.title}. Author: ${book.author}. Pages: ${book.numPages}.`;
+  div.classList.add("book");
+  return div;
+}
+
+function createRemoveBookButton() {
+  const removeBookButton = document.createElement("button");
+  removeBookButton.textContent = "Remove";
+  removeBookButton.classList.add("remove-book");
+  return removeBookButton;
 }
 
 function addListenerToRemoveButtons(){
