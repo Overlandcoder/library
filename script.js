@@ -2,11 +2,7 @@ let myLibrary = [];
 const bookList = document.querySelector(".book-list");
 const newBookButton = document.querySelector(".new-book");
 const formItems = document.querySelectorAll(".form-item");
-const addBook = document.querySelector(".add-book");
-const title = document.querySelector(".title");
-const author = document.querySelector(".author");
-const pages = document.querySelector(".pages");
-const read = document.querySelector(".read");
+const addBookButton = document.querySelector(".add-book");
 
 function Book(title, author, numPages, read) {
   this.title = title;
@@ -24,12 +20,14 @@ function addBookToLibrary(title, author, numPages, read) {
 }
 
 function displayAllBooks() {
-  myLibrary.forEach(book => {
-    const div = document.createElement("div");
-    div.classList.add("book");
-    div.textContent = `Title: ${book.title}. Author: ${book.author}. Pages: ${book.numPages}.`;
-    bookList.appendChild(div);
-  })
+  myLibrary.forEach(book => displayBook(book));
+}
+
+function displayBook(book) {
+  const div = document.createElement("div");
+  div.classList.add("book");
+  div.textContent = `Title: ${book.title}. Author: ${book.author}. Pages: ${book.numPages}.`;
+  bookList.appendChild(div);
 }
 
 function toggleDisplay(item) {
@@ -44,10 +42,16 @@ newBookButton.addEventListener("click", () => {
   formItems.forEach(item => item.classList.toggle("hidden"));
 });
 
-addBook.addEventListener("click", addBookClick);
+addBookButton.addEventListener("click", customSubmit);
 
-function addBookClick(event) {
+function customSubmit(event) {
   event.preventDefault();
+  const title = document.getElementById("title");
+  const author = document.getElementById("author");
+  const pages = document.getElementById("pages");
+  const read = document.getElementById("read");
+  addBookToLibrary(title.value, author.value, pages.value, read.value);
+  displayBook(myLibrary.at(-1));
 }
 
 addBookToLibrary("The Lord of the Rings", "J.R.R. Tolkien", 295, "read");
