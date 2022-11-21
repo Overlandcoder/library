@@ -2,6 +2,11 @@ let myLibrary = [];
 const bookList = document.querySelector(".book-list");
 const newBookButton = document.querySelector(".new-book");
 const formItems = document.querySelectorAll(".form-item");
+const addBook = document.querySelector(".add-book");
+const title = document.querySelector(".title");
+const author = document.querySelector(".author");
+const pages = document.querySelector(".pages");
+const read = document.querySelector(".read");
 
 function Book(title, author, numPages, read) {
   this.title = title;
@@ -38,6 +43,12 @@ function toggleDisplay(item) {
 newBookButton.addEventListener("click", () => {
   formItems.forEach(item => item.classList.toggle("hidden"));
 });
+
+addBook.addEventListener("click", addBookClick);
+
+function addBookClick(event) {
+  event.preventDefault();
+}
 
 addBookToLibrary("The Lord of the Rings", "J.R.R. Tolkien", 295, "read");
 addBookToLibrary("The Something", "Cool Author", 255, "not read");
