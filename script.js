@@ -5,11 +5,13 @@ const formItems = document.querySelectorAll(".form-item");
 const addBookButton = document.querySelector(".add-book");
 const cancelButton = document.querySelector(".cancel");
 
-function Book(title, author, numPages, read) {
-  this.title = title;
-  this.author = author;
-  this.numPages = numPages;
-  this.read = read;
+class Book {
+  constructor(title, author, numPages, read) {
+    this.title = title;
+    this.author = author;
+    this.numPages = numPages;
+    this.read = read;
+  }
 }
 
 function addBookToLibrary(title, author, numPages, read) {
