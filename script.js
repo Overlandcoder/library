@@ -77,9 +77,6 @@ function addListenerToCheckbox(cbox) {
 
 function customSubmit(event) {
   event.preventDefault();
-  const title = document.getElementById("title");
-  const author = document.getElementById("author");
-  const pages = document.getElementById("pages");
   const read = document.getElementById("read");
   addBookToLibrary(title.value, author.value, pages.value, read.checked);
   displayBook(myLibrary.at(-1));
@@ -87,13 +84,14 @@ function customSubmit(event) {
 
 newBookButton.addEventListener("click", () => {
   formItems.forEach(item => item.classList.toggle("hidden"));
+  addTitleListener();
+  addAuthorListener();
+  addPagesListener;
 });
 
 cancelButton.addEventListener("click", () => {
   formItems.forEach(item => item.classList.toggle("hidden"));
 })
-
-addBookButton.addEventListener("click", customSubmit);
 
 addBookToLibrary("The Lord of the Rings", "J.R.R. Tolkien", 295, true);
 addBookToLibrary("The Something", "Cool Author", 255, false);
@@ -103,3 +101,48 @@ displayAllBooks();
 
 const removeButtons = document.querySelectorAll(".remove-book");
 removeButtons.forEach(btn => addListenerToRemoveButton(btn));
+
+const title = document.getElementById("title");
+const author = document.getElementById("author");
+const pages = document.getElementById("pages");
+
+function addTitleListener() {
+  title.addEventListener("input", () => {
+    console.log("test");
+    if (title.validity.valueMissing) {
+      title.setCustomValidity("Title is required");
+    } else {
+      title.setCustomValidity("");
+    }
+  })
+}
+
+function addAuthorListener() {
+  author.addEventListener("input", () => {
+    if (author.validity.valueMissing) {
+      author.setCustomValidity("Author is required");
+    } else {
+      author.setCustomValidity("");
+    }
+  })
+}
+
+function addPagesListener() {
+  pages.addEventListener("input", () => {
+    if (pages.validity.valueMissing) {
+      pages.setCustomValidity("Number of pages is required");
+    } else {
+      pages.setCustomValidity("");
+    }
+  })
+}
+
+const form = document.getElementById("book-form");
+form.addEventListener("submit", (event) => {
+  if (title.validity.valid) {
+    console.log("test");
+    event.preventDefault();
+  }
+})
+
+addBookButton.addEventListener("click", customSubmit);
